@@ -10,6 +10,12 @@ package Clases;
  * @author Usuario
  */
 public class Producto {
-    String nombre = "peramno";
+    String nombre  ;
+    String marca;
+    int id_producto;
+    int cantidad ;
+    double precio;
+    
+    
     
 }
