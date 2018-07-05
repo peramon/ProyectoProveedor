@@ -5,6 +5,12 @@
  */
 package Interfaz;
 
+import Manejador.ManejadorUsuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -32,17 +38,19 @@ public class MenuPrin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnEntrarLog = new javax.swing.JButton();
-        txtCorreoLogin = new javax.swing.JTextField();
+        txtUsuarioLogin = new javax.swing.JTextField();
         txtContraLogin = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnSalirLog = new javax.swing.JButton();
+        rbnNatural = new javax.swing.JRadioButton();
+        rbnEmpresa = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        btnRegProveedor.setText("Registrar Proveedor");
+        btnRegProveedor.setText("Registrate");
         btnRegProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegProveedorMouseClicked(evt);
@@ -54,11 +62,16 @@ public class MenuPrin extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Correo:");
+        jLabel1.setText("Usuario");
 
         jLabel2.setText("Contraseña:");
 
         btnEntrarLog.setText("Entrar");
+        btnEntrarLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarLogActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("------- o -------");
 
@@ -72,6 +85,10 @@ public class MenuPrin extends javax.swing.JFrame {
             }
         });
 
+        rbnNatural.setText("Natural");
+
+        rbnEmpresa.setText("Empresa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,52 +96,62 @@ public class MenuPrin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(jLabel3))
+                        .addContainerGap()
+                        .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(166, 166, 166)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRegProveedor)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnEntrarLog)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
-                                .addComponent(btnSalirLog))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
-                                        .addComponent(jLabel2))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtContraLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                        .addComponent(txtCorreoLogin))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(btnRegProveedor)))
-                .addContainerGap())
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rbnNatural)
+                                            .addComponent(txtContraLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rbnEmpresa)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnSalirLog, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEntrarLog)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRegProveedor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(15, 15, 15)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCorreoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtUsuarioLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtContraLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEntrarLog)
-                    .addComponent(btnSalirLog))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtContraLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEntrarLog))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbnNatural)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbnEmpresa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalirLog)
+                .addGap(51, 51, 51))
         );
 
         pack();
@@ -145,6 +172,25 @@ public class MenuPrin extends javax.swing.JFrame {
     private void btnRegProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegProveedorMouseClicked
         // TODO add y
     }//GEN-LAST:event_btnRegProveedorMouseClicked
+
+    private void btnEntrarLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarLogActionPerformed
+        char [] contra = txtContraLogin.getPassword();
+       
+        String cn = new String(contra);
+        if (rbnNatural.isEnabled()) {
+            ManejadorUsuario mnjUsuario = new ManejadorUsuario();
+            try {
+                if (mnjUsuario.compararCamposPersonaNatural(txtUsuarioLogin.getText(), cn)) {
+                    JOptionPane.showMessageDialog(null, "Exito");
+                }else{
+                     JOptionPane.showMessageDialog(null, "Fail");
+                }
+                
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println("error"+ex);
+            }
+        }
+    }//GEN-LAST:event_btnEntrarLogActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,7 +235,9 @@ public class MenuPrin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JRadioButton rbnEmpresa;
+    private javax.swing.JRadioButton rbnNatural;
     private javax.swing.JPasswordField txtContraLogin;
-    private javax.swing.JTextField txtCorreoLogin;
+    private javax.swing.JTextField txtUsuarioLogin;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,8 +15,8 @@ import java.sql.SQLException;
  */
 public class Conexion {
     
-    public class ConexionMySql {
-    private final String base = "datos";
+   
+    private final String base = "proveedores";
     private final String usuario = "usuario";
     private final String clave = "usuario01";
     private final String url = "jdbc:mysql://localhost:3306/" + base;
@@ -30,4 +30,4 @@ public class Conexion {
         
     }
 }
-}
+
