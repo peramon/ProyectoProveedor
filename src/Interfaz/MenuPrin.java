@@ -189,6 +189,8 @@ public class MenuPrin extends javax.swing.JFrame {
             } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println("error"+ex);
             }
+        }else if(rbnEmpresa.isEnabled()){
+            
         }
     }//GEN-LAST:event_btnEntrarLogActionPerformed
 
