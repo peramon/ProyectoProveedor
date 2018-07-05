@@ -17,8 +17,17 @@ public class ProveedorNatural {
     private String celular;
     private String correo;
     private Direccion direccion;
+    private Usuario credenciales;
 
     public ProveedorNatural() {
+    }
+
+    public Usuario getCredenciales() {
+        return credenciales;
+    }
+
+    public void setCredenciales(Usuario credenciales) {
+        this.credenciales = credenciales;
     }
 
     public ProveedorNatural(String cedula, String apellidos, String nombres, String celular, String correo, Direccion direccion) {
