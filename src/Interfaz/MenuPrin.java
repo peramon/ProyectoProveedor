@@ -165,7 +165,7 @@ public class MenuPrin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegProveedorActionPerformed
 
     private void btnSalirLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirLogActionPerformed
-      
+
         System.exit(0);
     }//GEN-LAST:event_btnSalirLogActionPerformed
 
@@ -174,27 +174,31 @@ public class MenuPrin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegProveedorMouseClicked
 
     private void btnEntrarLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarLogActionPerformed
-        char [] contra = txtContraLogin.getPassword();
-       
+        char[] contra = txtContraLogin.getPassword();
+
         String cn = new String(contra);
-        if (rbnNatural.isEnabled()) {
+        if (rbnNatural.isSelected()) {
             ManejadorUsuario mnjUsuario = new ManejadorUsuario();
             try {
                 if (mnjUsuario.compararCamposPersonaNatural(txtUsuarioLogin.getText(), cn)) {
                     JOptionPane.showMessageDialog(null, "Exito");
-                }else{
-                     JOptionPane.showMessageDialog(null, "Fail");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fail");
                 }
-                
+
             } catch (ClassNotFoundException | SQLException ex) {
-                System.out.println("error"+ex);
+                System.out.println("error" + ex);
+            }
+        } else {
+            if ((rbnEmpresa.isSelected())) {
+
             }
         }
     }//GEN-LAST:event_btnEntrarLogActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
+         * @param args the command line arguments
+         */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
