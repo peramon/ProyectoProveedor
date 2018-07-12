@@ -16,15 +16,25 @@ import java.sql.Statement;
 public class DATUser {
 
     Conexion mySql = new Conexion();
-
-    public ResultSet obtenerUsuarioNatural(String user, String pass) throws ClassNotFoundException, SQLException {
+    /*
+    *Recibe Usuario, Contrasena y un  boolean segun su valor se sabe si es persona o empresa.. 
+    */
+    public ResultSet validarCredencialesLogin(String user, String pass, boolean pase) throws ClassNotFoundException, SQLException {
         Statement coneccion = mySql.getConexion().createStatement();
-        String sql = "SELECT usuarioPersona,contrasena \n"
+        String sqlPersona = "SELECT usuarioPersona,contrasena \n"
                 + "FROM `clientepersonaproveedor` \n"
-                + "WHERE usuarioPersona = '"+user+"' \n"
-                + "AND contrasena = '"+pass+"'";
+                + "WHERE usuarioPersona = '" + user + "' \n"
+                + "AND contrasena = '" + pass + "'";
+        
+        String sqlEmpresa = "SELECT usuarioEmpresa, contrasena FROM `clienteempresaproveedor` \n"
+                + "WHERE usuarioEmpresa = '" + user + "' \n"
+                + "AND contrasena = '" + pass + "'";
 
-        return coneccion.executeQuery(sql);
+        if (pase == true) {
+            return coneccion.executeQuery(sqlPersona);
+        } else {
+            return coneccion.executeQuery(sqlEmpresa);
+        }
 
     }
 

@@ -5,7 +5,7 @@
  */
 package Manejador;
 
-import Clases.ProveedorNatural;
+
 import DATProveedor.DATUser;
 import Clases.Usuario;
 import java.sql.ResultSet;
@@ -17,10 +17,9 @@ import java.sql.SQLException;
  */
 public class ManejadorUsuario {
     
-    public boolean compararCamposPersonaNatural(String user,String pass) throws ClassNotFoundException, SQLException{
+    public boolean compararCredenciales(String user,String pass, boolean pase) throws ClassNotFoundException, SQLException{
         DATUser objUsuario = new DATUser();
-        ResultSet rs = objUsuario.obtenerUsuarioNatural(user, pass);
-        ProveedorNatural objProveedorNatural = new ProveedorNatural();
+        ResultSet rs = objUsuario.validarCredencialesLogin(user, pass, pase);
         Usuario objCredenciales = new Usuario();
         
         
@@ -29,10 +28,10 @@ public class ManejadorUsuario {
             objCredenciales.setPass(rs.getString(2));
         }
         return user.equals(objCredenciales.getUsuario())&&pass.equals(objCredenciales.getPass());
-        
-        
+         
         
     }
+   
     
     
 }

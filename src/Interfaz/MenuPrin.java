@@ -177,30 +177,44 @@ public class MenuPrin extends javax.swing.JFrame {
         char[] contra = txtContraLogin.getPassword();
 
         String cn = new String(contra);
-        if (rbnNatural.isSelected()) {
-            ManejadorUsuario mnjUsuario = new ManejadorUsuario();
-            try {
-                if (mnjUsuario.compararCamposPersonaNatural(txtUsuarioLogin.getText(), cn)) {
-                    JOptionPane.showMessageDialog(null, "Exito");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Fail");
-                }
 
-            } catch (ClassNotFoundException | SQLException ex) {
-                System.out.println("error" + ex);
+        boolean pase = controlarRbn();
+        ManejadorUsuario mnjUser = new ManejadorUsuario();
+        try {
+            if (mnjUser.compararCredenciales(txtUsuarioLogin.getText(), cn, pase)) {
+                JOptionPane.showMessageDialog(null, "Exito");
+            } else {
+                JOptionPane.showMessageDialog(null, "Fail");
             }
-        } else {
-            if ((rbnEmpresa.isSelected())) {
 
-            }
-        }else if(rbnEmpresa.isEnabled()){
-            
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("error:" + ex.getMessage());
         }
     }//GEN-LAST:event_btnEntrarLogActionPerformed
+    private boolean controlarRbn() {
+        if (rbnNatural.isSelected()) {
+            rbnEmpresa.setEnabled(false);
+            rbnEmpresa.setSelected(false);
+            return true;
+        } else {
+            if (rbnEmpresa.isSelected()) {
+                rbnNatural.setEnabled(false);
+                rbnNatural.setSelected(false);
+            }
+
+        }
+        if (rbnNatural.isSelected() == false && rbnEmpresa.isSelected() == false) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de proveedor");
+
+        }
+        
+        return false;
+
+    }
 
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
